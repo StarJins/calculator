@@ -1,4 +1,7 @@
 pipeline {
+    triggers {
+        pollSCM('* * * * *')
+    }
     agent {
         label 'java17'
     }
@@ -28,7 +31,7 @@ pipeline {
             steps {
                 sh "./gradlew checkstyleMain"
                 publishHTML (target: [
-                    reportDir: 'build/reports/checkstype/',
+                    reportDir: 'build/reports/checkstyle/',
                     reportFiles: 'main.html',
                     reportName: "Checkstyle Report"
                 ])
