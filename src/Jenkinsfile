@@ -3,11 +3,6 @@ pipeline {
         label 'java17'
     }
     stages {
-        stage("Checkout") {
-            steps {
-                git url: 'https://github.com/StarJins/calculator.git', branch: 'main'
-            }
-        }
         stage("Compile") {
             steps {
                 sh "./gradlew compileJava"
