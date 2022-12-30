@@ -38,4 +38,13 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            discordSend description: "Discord Notifier",
+            title: JOB_NAME,
+            link: env.BUILD_URL,
+            result: currentBuild.currentResult,
+            webhookURL: "https://discord.com/api/webhooks/1058296726689165372/VOIdYMUS7e6st_uhO-loKFIDs7voskfKgsiG-ggfoBTRYBAedN4FJIMYnFTplWBYUVzH"
+        }
+    }
 }
