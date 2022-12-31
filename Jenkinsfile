@@ -40,6 +40,21 @@ pipeline {
                 ])
             }
         }
+        stage("Package") {
+            steps {
+                sh "./gradlew build"
+            }
+        }
+        stage("Docker build") {
+            steps {
+                sh "docker build -t tmzls123/calculator ."
+            }
+        }
+        stage("Docker push") {
+            steps {
+                sh "docker push tmzls123/calculator"
+            }
+        }
     }
     post {
         success {
