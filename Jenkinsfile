@@ -55,8 +55,22 @@ pipeline {
                 sh "docker push tmzls123/calculator"
             }
         }
+        stage("Deploy to staging") {
+            steps {
+                sh "docker run -d --rm -p 8765:8081 --name calculator tmzls123/calculator"
+            }
+        }
+        stage("Acceptance test") {
+            steps {
+                sleep 60
+                sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
+            }
+        }
     }
     post {
+        always {
+            sh "docker stop calculator"
+        }
         success {
             discordSend description: "테스트 빌드가 성공했습니다",
             link: env.BUILD_URL, result: currentBuild.currentResult,
