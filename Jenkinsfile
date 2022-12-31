@@ -6,7 +6,7 @@ pipeline {
         pollSCM('* * * * *')
     }
     agent {
-        label 'java17'
+        label 'dind'
     }
     stages {
         // stage("Compile") {
